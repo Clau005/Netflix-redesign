@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { baseUrl } from '../constants/movie'
 import { FaPlay } from "react-icons/fa"
 import { InformationCircleIcon } from '@heroicons/react/solid'
+import { modalState, movieState } from '../atoms/modalAtom'
+import { useRecoilState } from 'recoil'
 
 interface Props {
   netflixOriginals : Movie[]
@@ -12,6 +14,9 @@ interface Props {
 
 function Banner({netflixOriginals}: Props) {
   const [movie, setMovie] = useState<Movie | null>(null)
+  const [showModal, setShowModal] = useRecoilState(modalState)
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+
 //Setting up a random filter to show up a different movie everytime the page is refreshed
   useEffect(() => {
     setMovie(
@@ -19,7 +24,7 @@ function Banner({netflixOriginals}: Props) {
     )
   }, [netflixOriginals])
 
-  // console.log(movie)
+
 
   //Return and display back the banner movie
   return (
@@ -45,7 +50,12 @@ function Banner({netflixOriginals}: Props) {
             <button className="bannerButton bg-white text-black">
               <FaPlay className='h-4 w-4 text-black md:h-7 md:w-7' />Play
             </button>
-            <button className="bannerButton bg-[grey]/70">
+            <button 
+            onClick={()=> {
+              setCurrentMovie(movie)
+              setShowModal(true)
+            }}
+            className="bannerButton bg-[grey]/70">
               More Info<InformationCircleIcon className='h-6 w-6 md:h-9 md:w-9' /></button>
         </div>
     </div>
