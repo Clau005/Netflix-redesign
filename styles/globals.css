@@ -36,4 +36,20 @@
         @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-[grey]
          bg-[#242424]/60 transition hover:bg-white/10 hover:border-white
     }
+
+    .planLinks {
+        @apply flex items-center text-lg gap-x-2
+    }
+
+    .ChkIcon {
+        @apply h-6 w-6 text-red-600
+    }
+
+    .planBox {
+        @apply relative mx-1.5 flex h-20 bg-[#e50914] w-[calc(100%/3)] cursor-default
+         items-center justify-center rounded-sm font-semibold shadow 
+         after:absolute after:top-full after:left-1/2  after:block after:-translate-x-1/2 
+         after:border-8 after:border-b-0 after:border-transparent after:border-t-[#e50914] after:content-[""]
+         md:h-32 lg:mx-8
+    }
 }

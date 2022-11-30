@@ -8,6 +8,7 @@ import useAuth from '../hooks/useAuth'
 import { useRecoilValue } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 import Modal from '../components/Modal'
+import Plans from '../components/Plans'
 
 
 
@@ -36,9 +37,12 @@ const Home = ({
 }: Props) => {
   const {loading } = useAuth()
   const showModal = useRecoilValue(modalState)
+  const subscribtion = false
 
 
-  if (loading) return null
+  if (loading || subscribtion === null) return null
+
+  if(!subscribtion) return <Plans />
   
   return (
     <div
