@@ -65,6 +65,12 @@
         @apply w-full p-2.5 text-center text-sm font-normal text-white md:w-2/5 md:p-3.5 md:text-left md:text-base;
     }
 
+    .accountRow {
+        @apply mt-6 grid grid-cols-1 gap-x-4 border py-4 px-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0
+    }
 
+    .membershipLink {
+         @apply cursor-pointer text-blue-500 hover:underline;
+    }
    
 }

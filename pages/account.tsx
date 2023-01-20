@@ -2,6 +2,7 @@ import { getProducts, Product } from "@stripe/firestore-stripe-payments"
 import { GetStaticProps } from "next"
 import Head from "next/head"
 import Link from "next/link"
+import Membership from "../components/Membership"
 import useAuth from "../hooks/useAuth"
 import  useSubscription  from '../hooks/useSubscription'
 import payments from "../lib/stripe"
@@ -15,7 +16,7 @@ interface Props {
 
 function Account( {products } : Props) {
   console.log(products)
-  const {user} = useAuth()
+  const {user, logOut} = useAuth()
   const subscription = useSubscription(user)
   return (
     <div>
@@ -41,7 +42,7 @@ function Account( {products } : Props) {
         </Link>
       </header>
       <main className="mx-auto max-w-6xl pt-24 px-5 pb-12 transition-all md:px-10">
-          <div className="flex flex-col  gap-x-4 md:flex-row md:items-center">
+          <div className="flex flex-col  gap-x-4 md:flex-row  md:items-center">
             <h1 className="text-3xl md:text-4xl">Account</h1>
             <div className="-ml-0.5 flex items-center gap-x-1.5">
             <img src="https://rb.gy/4vfk4r" alt="" className="h-7 w-7" />
@@ -49,10 +50,10 @@ function Account( {products } : Props) {
             </div>
           </div>
 
-          {/* <Membership /> */}
+          <Membership />
           
-          <div className="grid grid-cols-1 gap-x-4 border py-4 px-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
-            <h4>Plan Details</h4>
+          <div className="accountRow">
+            <h4 className="text-lg ">Plan Details</h4>
             {/* Find the current plan on the user */}
             <div>
             {
@@ -61,7 +62,15 @@ function Account( {products } : Props) {
               )[0]?.name
             }
             </div>
-            <p>Cahnge plan</p>
+            <p className="cursor-pointer text-blue-500 hover:underline md:text-right">Change plan</p>
+          </div>
+            
+          <div className="accountRow">
+            <h4 className="text-lg text-[gray]">Settings</h4>
+            <p className="cursor-pointer col-span-3 text-blue-500 hover:underline"
+               onClick={logOut}>
+            Sign Out
+            </p>
           </div>
       </main>
     </div>
